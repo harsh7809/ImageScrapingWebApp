@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Scrape Images</title>
+</head>
+<body>
+    <h1>Scrape Images</h1>
+    <form method="post">
+        {% csrf_token %}
+        <label for="url">Enter URL:</label><br>
+        <input type="text" id="url" name="url" required><br><br>
+        <button type="submit">Scrape Images</button>
+    </form>
+    
+    {% if error %}
+        <p>{{ error }}</p>
+    {% endif %}
+    
+    {% if images %}
+        <div class="image-container">
+            {% for image in images %}
+                <img src="{{ image.image.url }}" alt="Scraped Image">
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>No images found.</p>
+    {% endif %}
+</body>
+</html>
